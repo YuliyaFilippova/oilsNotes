@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Список пользователей</title>
+
+    <link rel="stylesheet" href="editor/jquery-te-1.4.0.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="editor/jquery-te-1.4.0.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/script-tabs.js"></script>
+
+</head>
+<body>
+    <!-- modal add oil -->
+    <div class="modal-add">
+        <button class="close"></button>
+        <h2>Добавить масло</h2>
+        <form name="userForm" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="0" />
+            <div class="form-group">
+                <label for="name">Название:</label>
+                <input class="form-control" name="name" />
+            </div>
+            <div class="form-group">
+                <label for="note">Нота: </label>
+                <input type="radio" id="high" name="note" value="3"><label for="high">Верхний</label>
+                <input type="radio" id="middle" name="note" value="2"><label for="middle">Средний</label>
+                <input type="radio" id="low" name="note" value="1"><label for="low">Нижний</label>
+            </div>
+            <div class="form-group">
+                <label for="energetic">Энергетика: </label>
+                <input type="checkbox" id="hot" name="energetic" value="1"><label for="hot">Согревающая</label>
+                <input type="checkbox" id="cold" name="energetic" value="2"><label for="cold">Охлаждающая</label>
+                <input type="checkbox" id="moisturizing" name="energetic" value="3"><label
+                    for="moisturizing">Увлажняющая</label>
+                <input type="checkbox" id="drying" name="energetic" value="4"><label for="frying">Сушащая</label>
+            </div>
+            <div class="form-group">
+                <label for="description">Описание:</label>
+                <textarea name="description" class="jqte-test1"></textarea>
+                <script> $('.jqte-test1').jqte();</script>
+            </div>
+            <div class="form-group">
+                <input type="file" name="filedata" class="btn btn-sm" />
+            </div>
+            <div class="panel-body">
+                <button type="submit" class="btn btn-sm btn-success">Save</button>
+                <a id="reset" class="btn btn-sm btn-success">Reset</a>
+            </div>
+        </form>
+    </div>
+    <!-- modal add blend -->
+    <div class="modal-add-blend">
+        <button class="close"></button>
+        <h2>Добавить композицию</h2>
+        <form name="blendForm" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="idBl" value="0" />
+            <div class="form-group">
+                <label for="name">Название:</label>
+                <input class="form-control" name="name" />
+            </div>
+            <div class="form-group">
+                <label for="ml">Количество мл:</label>
+                <select name="ml">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Выберите масла:</label>
+                <div class="oils-base">
+                    <div id="note1">Нижняя нота</div>
+                    <div id="note2">Средняя нота</div>
+                    <div id="note3">Верхняя нота</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Описание:</label>
+                <textarea name="description" class="jqte-test2"></textarea>
+                <script> $('.jqte-test2').jqte();</script>
+            </div>
+            <div class="panel-body">
+                <button type="submit" class="btn btn-sm btn-success">Continue</button>
+                <a id="reset" class="btn btn-sm btn-success">Reset</a>
+            </div>
+        </form>
+    </div>
+    <!-- end modal add blend -->
+
+    <div id="container">
+        <ul class="nav nav-tabs" id="tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" id="oils-tab" data-toggle="tab" href="#oils" role="tab" aria-controls="oils"
+                    aria-selected="true">OILS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="blends-tab" data-toggle="tab" href="#blends" role="tab" aria-controls="blends"
+                    aria-selected="false">BLENDS</a>
+            </li>
+        </ul>
+        
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane fade active" id="oils" role="tabpanel" aria-labelledby="oils-tab">
+                <div>
+                    <aside>
+                        <button class="add"></button>
+                        <table class="oils-list">
+                            <tbody></tbody>
+                        </table>
+                    </aside>
+                    <main>
+                        <div class="oilPhoto"></div>
+                        <div class="oilName">Название: <span></span></div>
+                        <div class="oilNote">Нота: <span></span></div>
+                        <div class="oilEnergy">Свойства: <span></span></div>
+                        <div class="oilDescr">Описание: <span></span></div>
+                    </main>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="blends" role="tabpanel" aria-labelledby="blends-tab">
+                <div>
+                    <aside>
+                        <button class="add-blend"></button>
+                        <div class="blends-list">
+                            <div class="blend-item">blend1 <button class="delete"></button><button class="edit"></button></div>
+                        </div>
+                    </aside>
+                    <main>
+                        <div class="slider">Фото</div>
+                        <div class="blendName">Название: <span></span></div>
+                        <div class="blendML">Количество мл: <span></span></div>
+                        <div class="blendComps">Состав: <span></span></div>
+                        <div class="blendDescr">Описание: <span></span></div>
+                    </main>
+                </div>
+            </div>
+        </div>
+        <script>
+              $(function () {
+                   $('#oils-tab').tab('show');
+                });
+        </script>
+    </div>
+
+
+</body>
+</html>
